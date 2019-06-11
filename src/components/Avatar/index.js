@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 
 const propTypes = {
-    onAvatarClicked: PropTypes.func,
+    closeModal: PropTypes.func,
     notifications: PropTypes.number,
 };
 
 
-const Avatar = ({onAvatarClicked, notifications = 0}) => {
+const Avatar = ({closeModal, notifications = 0}) => {
     return (
-        <div onClick={() => onAvatarClicked()} className="avatar-container">
+        <div onClick={() => closeModal()} className="avatar-container">
             <img src="https://i.imgur.com/n55ZsQO.png" className="avatar" alt="user avatar"/>
             {
                 notifications > 0 &&

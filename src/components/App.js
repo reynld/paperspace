@@ -72,7 +72,7 @@ Index: "${i}"
     this.setState({...this.state, alerts})
   }
 
-  onAvatarClicked = () => {
+  closeModal = () => {
     this.setState({...this.state, showModal: !this.state.showModal})
   }
 
@@ -80,9 +80,9 @@ Index: "${i}"
     const { showModal, alerts } = this.state;
     return (
       <div className="App">
-        <Avatar onAvatarClicked={this.onAvatarClicked} notifications={alerts.length}/>
+        <Avatar closeModal={this.closeModal} notifications={alerts.length}/>
         {
-          showModal && <Modal alerts={alerts} onCloseModal={this.onAvatarClicked}/>
+          showModal && <Modal alerts={alerts} onCloseModal={this.closeModal}/>
         }
       </div>
     );
