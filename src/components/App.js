@@ -6,6 +6,26 @@ class App extends Component {
 
   state = {
     showModal: false,
+    alerts: [
+      {
+        title: "Title-1",
+        body: "Body-3",
+        date: "7/21/2018",
+        image: ""
+      },
+      {
+        title: "Title-2",
+        body: "Body-2",
+        date: "7/14/2018",
+        image: ""
+      },
+      {
+        title: "Title-3",
+        body: "Body-3",
+        date: "7/7/2018",
+        image: ""
+      }
+    ]
   }
 
   onAvatarClicked = () => {
@@ -13,12 +33,12 @@ class App extends Component {
   }
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, alerts } = this.state;
     return (
       <div className="App">
-        <Avatar onAvatarClicked={this.onAvatarClicked} notifications={2}/>
+        <Avatar onAvatarClicked={this.onAvatarClicked} notifications={alerts.length}/>
         {
-          showModal && <Modal/>
+          showModal && <Modal alerts={alerts}/>
         }
       </div>
     );
