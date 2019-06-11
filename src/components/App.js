@@ -29,14 +29,15 @@ ${err}
     const alerts = [];
     let alert = [];
 
-    //  Loops through each markdown line
-    //  checking to see if the line starts with '###'
-    //  if it does, it appends the line to the alert array
-    //  once we reach a line the does not start '###'
-    //  we have all the alerts values and that current line is the body
-    //  then we append a new alert object into the alerts array
-    //  using the position in the alert array to determine what value it is
-    ///////////
+    /************
+    Loops through each markdown line
+    checking to see if the line starts with '###'
+    if it does, it appends the line to the alert array
+    once we reach a line the does not start '###'
+    we have all the alerts values and that current line is the body
+    then we append a new alert object into the alerts array
+    using the position in the alert array to determine what value it is
+    ************/
     mdArr.forEach((ln, i) => {
       if (i !== 0) {
         const alen = alert.length;
