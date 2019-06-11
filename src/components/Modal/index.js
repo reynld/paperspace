@@ -18,13 +18,15 @@ const propTypes = {
 
 const Modal = ({alerts, onCloseModal}) => {
     return (
-        <div className="modal-container">
+        <div className="modal-wrapper">
             <span className="close-modal" onClick={() => onCloseModal()}>x</span>
-            {
-                alerts && alerts.map((alert, i) => {
-                    return <Alert key={i} {...alert} />
-                })
-            }
+            <div className="modal-list">
+                {
+                    alerts && alerts.map((alert, i) => {
+                        return <Alert key={i} {...alert} />
+                    })
+                }
+            </div>
         </div>
     );
 };
