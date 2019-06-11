@@ -38,7 +38,7 @@ class App extends Component {
       <div className="App">
         <Avatar onAvatarClicked={this.onAvatarClicked} notifications={alerts.length}/>
         {
-          showModal && <Modal alerts={alerts}/>
+          showModal && <Modal alerts={alerts} onCloseModal={this.onAvatarClicked}/>
         }
       </div>
     );

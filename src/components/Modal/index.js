@@ -11,14 +11,15 @@ const propTypes = {
             date: PropTypes.string,
             image: PropTypes.string,
         })
-    )
+    ),
+    onCloseModal: PropTypes.func,
 };
 
 
-const Modal = ({alerts}) => {
+const Modal = ({alerts, onCloseModal}) => {
     return (
         <div className="modal-container">
-            <span className="close-modal">x</span>
+            <span className="close-modal" onClick={() => onCloseModal()}>x</span>
             {
                 alerts && alerts.map((alert, i) => {
                     return <Alert key={i} {...alert} />
