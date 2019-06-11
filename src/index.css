@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -14,7 +18,8 @@ code {
 
 .App {
   text-align: center;
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  background: white;
   width: 100vw;
   height: 100vh;
 }
@@ -52,13 +57,77 @@ code {
 }
 
 .modal-container {
-  width: 620px;
-  height: 300px;
+  width: 80%;
+  min-width: 420px;
+  max-width: 620px;
+  height: 400px;
   color: black;
   background: white;
-  border: 1px solid rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.1);
   border-radius: 4px;
   position: fixed;
   top: 120px;
-  left: calc(50% - 320px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  overflow: scroll;
+  box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
+  padding-bottom: 50px;
 }
+
+.close-modal {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.56;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.close-modal:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.alert-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 25px;
+}
+
+.alert-date {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 25px;
+}
+
+.alert-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 350px;
+  /* border: 1px solid red; */
+  border-bottom: 2px solid rgba(0,0,0,0.14);
+  text-align: left;
+}
+
+.alert-info h2 {
+  margin: 0px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.alert-image {
+  width: 280px;
+  height: 150px;
+  margin-bottom: 50px;
+}
+
