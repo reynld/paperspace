@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -53,6 +57,7 @@ code {
 
 .modal-container {
   width: 620px;
+  height: 400px;
   color: black;
   background: white;
   border: 1px solid rgba(0,0,0,0.4);
@@ -60,6 +65,7 @@ code {
   position: fixed;
   top: 120px;
   left: calc(50% - 320px);
+  overflow: scroll;
 }
 
 .close-modal {
@@ -78,3 +84,43 @@ code {
   opacity: 1;
   cursor: pointer;
 }
+
+.alert-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 25px;
+}
+
+.alert-date {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 25px;
+}
+
+.alert-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 350px;
+  /* border: 1px solid red; */
+  border-bottom: 2px solid rgba(0,0,0,0.14);
+
+}
+
+.alert-info h2 {
+  margin: 0px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.alert-image {
+  width: 280px;
+  height: 150px;
+  margin-bottom: 50px;
+}
+
