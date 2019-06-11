@@ -1,24 +1,28 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react';
+import Avatar from './Avatar';
+import Modal from './Modal';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    showModal: false,
+  }
+
+  onAvatarClicked = () => {
+    this.setState({...this.state, showModal: !this.state.showModal})
+  }
+
+  render() {
+    const { showModal } = this.state;
+    return (
+      <div className="App">
+        <Avatar onAvatarClicked={this.onAvatarClicked} notifications={2}/>
+        {
+          showModal && <Modal/>
+        }
+      </div>
+    );
+  }
 }
 
 export default App;
