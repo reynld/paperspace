@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Avatar from './Avatar';
 import Modal from './Modal';
+import images from '../assets/illustrations.json'
 
 class App extends Component {
 
@@ -10,20 +11,20 @@ class App extends Component {
       {
         title: "Title-1",
         body: "Body-3",
-        date: "7/21/2018",
-        image: ""
+        date: "6/11/2019",
+        image: images[0]
       },
       {
         title: "Title-2",
         body: "Body-2",
-        date: "7/14/2018",
-        image: ""
+        date: "6/9/2019",
+        image: images[1]
       },
       {
         title: "Title-3",
         body: "Body-3",
-        date: "7/7/2018",
-        image: ""
+        date: "6/1/2019",
+        image: images[2]
       }
     ]
   }
