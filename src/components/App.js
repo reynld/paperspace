@@ -67,6 +67,7 @@ Index: "${i}"
       }
     })
 
+    alerts.sort((a, b) => new Date(b.date) - new Date(a.date))
     this.setState({...this.state, alerts})
   }
 
