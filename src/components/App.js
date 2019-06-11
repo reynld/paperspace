@@ -1,24 +1,19 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react';
+import Avatar from './Avatar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  onAvatarClicked = () => {
+    console.log('CLICKED')
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Avatar onAvatarClicked={this.onAvatarClicked} notifications={2}/>
+      </div>
+    );
+  }
 }
 
 export default App;
