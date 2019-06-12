@@ -98,10 +98,22 @@ code {
   padding-bottom: 20px;
   overflow: scroll;
   overflow-x: hidden;
+  transition: height 400ms ease-in-out;
 }
 
 .modal-wrapper.detail-modal-wrapper {
-  height: auto;
+  height: 500px;
+  overflow: hidden;
+}
+
+.modal-wrapper.detail-modal-wrapper > .modal-list {
+  height: 500px;
+}
+
+.detail-modal-wrapper > .detailed-view {
+  transform: translateX(0px);
+  background: white;
+  height: 100%;
 }
 
 .modal-button {
@@ -115,6 +127,7 @@ code {
   height: 30px;
   line-height: 30px;
   user-select: none;
+  z-index:99;
 }
 
 .modal-button:hover {
@@ -202,7 +215,17 @@ code {
   background: #35A04D;
 }
 
-.alert-info.detailed-view {
+.detailed-view {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 2;
+  transform: translateX(-620px);
+  background: white;
+  transition: transform 400ms ease-in-out;
+}
+
+.detailed-view > .alert-info {
   max-width: 100%;
   padding: 0px 50px;
   height: 100%;
@@ -211,7 +234,7 @@ code {
   cursor: default;
 }
 
-.detailed-view > .alert-date {
+.detailed-view > .alert-info >.alert-date {
   padding-left: 0px;
   margin-top: 10px;
 }

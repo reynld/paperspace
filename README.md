@@ -1,8 +1,5 @@
 # Paperspace Notifier
 Sample project for Paperspace
-
-### [Requirements](https://gist.github.com/curtis-ps/ed970aee7bc5b0b37a035960ce10b9eb)
-
 ### [Demo](https://ps-notifier.now.sh/)
 
 ## GIST format 

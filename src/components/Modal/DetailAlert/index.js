@@ -10,16 +10,15 @@ const propTypes = {
         date: string,
         image: string,
     }),
-    selectAlert: func,
 };
 
 const DetailAlert = (props) => {
-    const { alert, selectAlert} = props;
+    const { alert } = props;
     const { title, body, date, image, tag } = alert;
 
     return (
-        <div className="alert-container" onClick={() => selectAlert(alert)}>
-            <div className="alert-info detailed-view">
+        <div className="alert-container detailed-view">
+            <div className="alert-info">
                 <h2>{title}</h2>
                 <div className="alert-date">{formatDaysPassed(date)}</div>
                 <Tag tag={tag}/>

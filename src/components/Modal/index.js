@@ -22,42 +22,36 @@ const propTypes = {
     closeModal: func,
     selectAlert: func,
     detailView: bool,
+    toggleDetail: func,
 };
 
 
 class Modal extends Component {
 
-    setWrapperRef = (node) => {
-        this.wrapperRef = node;
-    }
+    wrapperRef = React.createRef()
 
     handleClickOutside = (event) => {
         const { closeModal } = this.props;
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
             closeModal();
         }
     }
 
     renderAlerts = () => {
-        const { alerts, selectAlert, selectedAlert, detailView } = this.props;
-
-        if (detailView) {
-            return <DetailAlert alert={selectedAlert} selectAlert={selectAlert}/>
-        }
-
+        const { alerts } = this.props;
         return alerts.map((alert, i) => {
-            return <Alert key={i} alert={alert} selectAlert={selectAlert}/>
+            return <Alert key={i} alert={alert} selectAlert={this.onSelectAlertClick}/>
         })
     }
 
     renderButton = () => {
-        const { closeModal, detailView, selectAlert  } = this.props;
+        const { closeModal, detailView, toggleDetail } = this.props;
 
         if (detailView) {
             return (
                 <i
                     className="fas fa-chevron-left modal-button back-button" 
-                    onClick={() => selectAlert({})}
+                    onClick={() => toggleDetail()}
                 />
             )
         }
@@ -70,14 +64,21 @@ class Modal extends Component {
         )
     }
 
+    onSelectAlertClick = (alert) => {
+        const { selectAlert } = this.props;
+        this.wrapperRef.current.scrollTo(0, 0);
+        selectAlert(alert)
+    }
+
     render() {
-        const { detailView } = this.props;
+        const { detailView, selectedAlert } = this.props;
         return (
             <div className="modal-cover" onClick={(e) => this.handleClickOutside(e)}>
                 <div 
                     className={`modal-wrapper ${detailView ? "detail-modal-wrapper" : ""}`}
-                    ref={this.setWrapperRef}>
+                    ref={this.wrapperRef}>
                     {this.renderButton()}
+                    <DetailAlert alert={selectedAlert}/>
                     <div className="modal-list">
                         {this.renderAlerts()}
                     </div>

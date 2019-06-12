@@ -12,6 +12,7 @@ class App extends Component {
     alerts: [],
     hasViewed: false,
     selectedAlert: {},
+    showDetail: false,
   }
 
   componentDidMount() {
@@ -78,7 +79,15 @@ Index: "${i}"
   selectAlert = (alert) => {
     this.setState({
       ...this.state, 
-      selectedAlert: alert
+      selectedAlert: alert,
+      showDetail: true,
+    })
+  }
+
+  toggleDetail = () => {
+    this.setState({
+      ...this.state,
+      showDetail: false,
     })
   }
 
@@ -96,9 +105,8 @@ Index: "${i}"
   }
 
   render() {
-    const { showModal, alerts, hasViewed, selectedAlert } = this.state;
+    const { showModal, alerts, hasViewed, selectedAlert, showDetail } = this.state;
     const alertCount = hasViewed ? 0 : alerts.length;
-    const detailView = Object.keys(selectedAlert).length ? true : false
 
     return (
       <div className="App">
@@ -110,7 +118,8 @@ Index: "${i}"
               closeModal={this.closeModal} 
               selectAlert={this.selectAlert}
               selectedAlert={selectedAlert}
-              detailView={detailView}
+              detailView={showDetail}
+              toggleDetail={this.toggleDetail}
             />
         }
       </div>
