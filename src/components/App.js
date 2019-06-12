@@ -11,6 +11,8 @@ class App extends Component {
     showModal: false,
     alerts: [],
     hasViewed: false,
+    selectedAlert: {},
+    showDetail: false,
   }
 
   componentDidMount() {
@@ -47,13 +49,14 @@ ${err}
           const content = ln.split('### ');
           alert.push(content[1]);
 
-        } else if (alen >= 2 && alen <= 3) {
+        } else if (alen === 4) {
 
           alerts.push({
             title: alert[0],
-            body:  ln,
             date: alert[1],
-            image: alen === 3 ? images[alert[2]] : ""
+            tag: alert[2],
+            image: images[alert[3]],
+            body:  ln,
           })
 
           alert = []
@@ -73,8 +76,28 @@ Index: "${i}"
     this.setState({...this.state, alerts})
   }
 
+  selectAlert = (alert) => {
+    this.setState({
+      ...this.state, 
+      selectedAlert: alert,
+      showDetail: true,
+    })
+  }
+
+  toggleDetail = () => {
+    this.setState({
+      ...this.state,
+      showDetail: false,
+    })
+  }
+
   closeModal = () => {
-    this.setState({...this.state, showModal: false, hasViewed: true})
+    this.setState({
+      ...this.state, 
+      showModal: false, 
+      hasViewed: true, 
+      selectedAlert: {},
+    })
   }
 
   openModal = () => {
@@ -82,14 +105,22 @@ Index: "${i}"
   }
 
   render() {
-    const { showModal, alerts, hasViewed } = this.state;
+    const { showModal, alerts, hasViewed, selectedAlert, showDetail } = this.state;
     const alertCount = hasViewed ? 0 : alerts.length;
 
     return (
       <div className="App">
         <Avatar openModal={this.openModal} notifications={alertCount}/>
         {
-          showModal && <Modal alerts={alerts} closeModal={this.closeModal}/>
+          showModal && 
+            <Modal 
+              alerts={alerts} 
+              closeModal={this.closeModal} 
+              selectAlert={this.selectAlert}
+              selectedAlert={selectedAlert}
+              detailView={showDetail}
+              toggleDetail={this.toggleDetail}
+            />
         }
       </div>
     );
