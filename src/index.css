@@ -99,22 +99,28 @@ code {
   box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
 }
 
-.close-modal {
+.modal-button {
   position: absolute;
   top: 4px;
   right: 12px;
   font-size: 22px;
   font-weight: 600;
-  opacity: 0.56;
+  opacity: 0.3;
   width: 30px;
   height: 30px;
   line-height: 30px;
   user-select: none;
 }
 
-.close-modal:hover {
+.modal-button:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+.back-button {
+  right: 0px;
+  left: 8px;
+  top: 22px;
 }
 
 .alert-container {

@@ -54,18 +54,18 @@ class Modal extends Component {
 
         if (Object.keys(selectedAlert).length) {
             return (
-                <span 
-                    className="close-modal" 
+                <i
+                    className="fas fa-chevron-left modal-button back-button" 
                     onClick={() => selectAlert({})}
-                >{'<'}</span>
+                />
             )
         }
 
         return (
-            <span 
-                className="close-modal" 
+            <i
+                className="fas fa-times modal-button" 
                 onClick={() => closeModal()}
-            >x</span>
+            />
         )
     }
 
