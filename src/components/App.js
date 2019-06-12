@@ -47,13 +47,14 @@ ${err}
           const content = ln.split('### ');
           alert.push(content[1]);
 
-        } else if (alen >= 2 && alen <= 3) {
+        } else if (alen === 4) {
 
           alerts.push({
             title: alert[0],
-            body:  ln,
             date: alert[1],
-            image: alen === 3 ? images[alert[2]] : ""
+            tag: alert[2],
+            image: images[alert[3]],
+            body:  ln,
           })
 
           alert = []
