@@ -18,7 +18,31 @@ const Alert = (props) => {
         return Math.ceil((today - newDay) / 8.64e7) - 1
     }
 
-    const { title, body, date, image} = props;
+    const renderTag = (tag) => {
+        if (tag === "new") {
+            return (
+                <div className="alert-tag tag-new">
+                    {tag}
+                </div>
+            );
+        }
+
+        if (tag === "improvements") {
+            return (
+                <div className="alert-tag tag-im">
+                    {tag}
+                </div>
+            );
+        }
+
+        return (
+            <div className="alert-tag">
+                {tag}
+            </div>
+        );
+    }
+
+    const { title, body, date, image, tag} = props;
 
     const daysPast = formatDate(date);
     const dateDisplayString = daysPast > 0 ? `${daysPast} days ago`: 'today'
@@ -28,6 +52,7 @@ const Alert = (props) => {
             <div className="alert-date">{dateDisplayString}</div>
             <div className="alert-info">
                 <h2>{title}</h2>
+                {renderTag(tag)}
                 <p>{body}</p>
                 {
                     image !== "" && <img src={image} alt="preview" className="alert-image" />

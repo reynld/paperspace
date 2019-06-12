@@ -149,6 +149,7 @@ code {
   margin: 0px;
   font-size: 18px;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .alert-image {
@@ -165,4 +166,25 @@ code {
   top: 0px;
   left: 0px;
   z-index: 1;
+}
+
+.alert-tag {
+  color: white;
+  height: 26px;
+  border-radius: 25px;
+  background: grey;
+  text-transform: uppercase;
+  padding: 4px 15px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 20px;
+  user-select: none;
+}
+
+.tag-new {
+  background: #4D72F7;
+}
+
+.tag-im {
+  background: #35A04D;
 }
