@@ -1,9 +1,11 @@
+
 .alert-container {
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     margin-top: 25px;
+    font-size: 1.4rem;
 
     .alert-date {
         width: 150px;
@@ -26,7 +28,7 @@
         cursor: pointer;
         h2 {
             margin: 0px;
-            font-size: 18px;
+            font-size: 1.8rem;
             font-weight: 800;
         }
         p {
@@ -42,18 +44,18 @@
             color: white;
             height: 26px;
             border-radius: 25px;
-            background: grey;
+            background: $default-tag-color;
             text-transform: uppercase;
             padding: 4px 15px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 1.4rem;
             margin: 20px 0px;
             user-select: none;
             &.tag-new {
-                background: #4D72F7;
+                background: $new-tag-color;
             }
             &.tag-im {
-                background: #35A04D;
+                background: $im-tag-color;
             }
         }
     }
