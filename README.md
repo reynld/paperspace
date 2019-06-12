@@ -2,6 +2,8 @@
 Sample project for Paperspace
 ### [Demo](https://ps-notifier.now.sh/)
 
+## [GIST Used](https://gist.githubusercontent.com/reynld/d618a3acd79e0e7b459fb79bf28b4615/raw/0fbb9b7b41e0a8179c4bdb9170224f37295f0c61/ps_notifier.md")
+
 ## GIST format 
 ```
 # TITLE [optional]
