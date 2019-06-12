@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, func, shape } from 'prop-types';
+import { string, shape } from 'prop-types';
 import { formatDaysPassed } from '../../Utils/helper'
 import Tag from '../Tag';
 
