@@ -21,28 +21,6 @@ code {
         monospace;
 }
 
-::-webkit-scrollbar,
-body ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-thumb,
-body ::-webkit-scrollbar-thumb {
-    opacity: 1;
-    border-radius: 4px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-track,
-body ::-webkit-scrollbar-track {
-    border-radius: 0px;
-    background: none;
-}
-
 .App {
     text-align: center;
     background: white;
