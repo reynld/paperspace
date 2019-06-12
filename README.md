@@ -10,7 +10,8 @@ Sample project for Paperspace
 # TITLE [optional]
 ### Alert title:        string
 ### Alert date:         string(MM/DD/YYYY)
-### Index for image:    number(0-2) [optional]
+### Tag                 string(new, improvements)
+### Index for image:    number(0-2)
 BODY:                   string
 ### Alert title:        string
 ....
