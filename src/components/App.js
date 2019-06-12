@@ -16,6 +16,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getMarkdown();
+  }
+
+  getMarkdown = () => {
     const { REACT_APP_GIST } = process.env;
     axios.get(REACT_APP_GIST)
     .then(res => {
