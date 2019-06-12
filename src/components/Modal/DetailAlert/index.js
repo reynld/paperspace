@@ -13,25 +13,27 @@ const propTypes = {
     selectAlert: func,
 };
 
-
-const Alert = (props) => {
-    const { alert, selectAlert } = props;
-    const { title, body, date, tag } = alert;
+const DetailAlert = (props) => {
+    const { alert, selectAlert} = props;
+    const { title, body, date, image, tag } = alert;
 
     return (
         <div className="alert-container" onClick={() => selectAlert(alert)}>
-            <div className="alert-date">{formatDaysPassed(date)}</div>
-            <div className="alert-info">
+            <div className="alert-info detailed-view">
                 <h2>{title}</h2>
+                <div className="alert-date">{formatDaysPassed(date)}</div>
                 <Tag tag={tag}/>
                 <p>{body}</p>
+                {
+                    image !== "" && <img src={image} alt="preview" className="alert-image" />
+                }
             </div>
         </div>
     );
 };
 
 
-Alert.propTypes = propTypes;
+DetailAlert.propTypes = propTypes;
 
 
-export default Alert;
+export default DetailAlert;

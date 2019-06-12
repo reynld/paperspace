@@ -11,6 +11,7 @@ class App extends Component {
     showModal: false,
     alerts: [],
     hasViewed: false,
+    selectedAlert: {},
   }
 
   componentDidMount() {
@@ -74,8 +75,20 @@ Index: "${i}"
     this.setState({...this.state, alerts})
   }
 
+  selectAlert = (alert) => {
+    this.setState({
+      ...this.state, 
+      selectedAlert: alert
+    })
+  }
+
   closeModal = () => {
-    this.setState({...this.state, showModal: false, hasViewed: true})
+    this.setState({
+      ...this.state, 
+      showModal: false, 
+      hasViewed: true, 
+      selectedAlert: {},
+    })
   }
 
   openModal = () => {
@@ -83,14 +96,20 @@ Index: "${i}"
   }
 
   render() {
-    const { showModal, alerts, hasViewed } = this.state;
+    const { showModal, alerts, hasViewed, selectedAlert } = this.state;
     const alertCount = hasViewed ? 0 : alerts.length;
 
     return (
       <div className="App">
         <Avatar openModal={this.openModal} notifications={alertCount}/>
         {
-          showModal && <Modal alerts={alerts} closeModal={this.closeModal}/>
+          showModal && 
+            <Modal 
+              alerts={alerts} 
+              closeModal={this.closeModal} 
+              selectAlert={this.selectAlert}
+              selectedAlert={selectedAlert}
+            />
         }
       </div>
     );

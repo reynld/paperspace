@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { string, func, arrayOf, shape } from 'prop-types';
 import Alert from './Alert';
+import DetailAlert from './DetailAlert';
 
 
 const propTypes = {
-    alerts: PropTypes.arrayOf(
-        PropTypes.shape({
-            title: PropTypes.string,
-            body: PropTypes.string,
-            date: PropTypes.string,
-            image: PropTypes.string,
+    alerts: arrayOf(
+        shape({
+            title: string,
+            body: string,
+            date: string,
+            image: string,
         })
     ),
-    closeModal: PropTypes.func,
+    selectedAlert: shape({
+        title: string,
+        body: string,
+        date: string,
+        image: string,
+    }),
+    closeModal: func,
+    selectAlert: func,
 };
 
 
@@ -29,22 +37,45 @@ class Modal extends Component {
         }
     }
 
+    renderAlerts = () => {
+        const { alerts, selectAlert, selectedAlert  } = this.props;
+
+        if (Object.keys(selectedAlert).length) {
+            return <DetailAlert alert={selectedAlert} selectAlert={selectAlert}/>
+        }
+
+        return alerts.map((alert, i) => {
+            return <Alert key={i} alert={alert} selectAlert={selectAlert}/>
+        })
+    }
+
+    renderButton = () => {
+        const { closeModal, selectedAlert, selectAlert  } = this.props;
+
+        if (Object.keys(selectedAlert).length) {
+            return (
+                <span 
+                    className="close-modal" 
+                    onClick={() => selectAlert({})}
+                >{'<'}</span>
+            )
+        }
+
+        return (
+            <span 
+                className="close-modal" 
+                onClick={() => closeModal()}
+            >x</span>
+        )
+    }
+
     render() {
-        const {alerts, closeModal} = this.props;
         return (
             <div className="modal-cover" onClick={(e) => this.handleClickOutside(e)}>
                 <div className="modal-wrapper" ref={this.setWrapperRef}>
-                    <span 
-                        className="close-modal" 
-                        onClick={() => closeModal()}
-                        >x</span>
-                    
+                    {this.renderButton()}
                     <div className="modal-list">
-                        {
-                            alerts && alerts.map((alert, i) => {
-                                return <Alert key={i} {...alert} />
-                            })
-                        }
+                        {this.renderAlerts()}
                     </div>
                 </div>
             </div>
