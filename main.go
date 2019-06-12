@@ -7,18 +7,26 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
+// Alert struct for parsed alerts from markdown
 type Alert struct {
 	Title string `json:"title"`
 	Date  string `json:"date"`
 	Tag   string `json:"tag"`
 	Image string `json:"image"`
 	Body  string `json:"body"`
+}
+
+var images = []string{
+	"https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/mobile_images_rc0q.svg",
+	"https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/goals_w8tw.svg",
+	"https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/online_party_ar9g.svg",
 }
 
 func main() {
@@ -56,11 +64,13 @@ func parseMarkDown(w http.ResponseWriter, r *http.Request) {
 			content := strings.Split(line, "### ")
 			alertArr = append(alertArr, content[1])
 		} else if len(alertArr) == 4 {
+			index, _ := strconv.Atoi(alertArr[3])
+
 			newAlert := Alert{
 				Title: alertArr[0],
 				Date:  alertArr[1],
 				Tag:   alertArr[2],
-				Image: alertArr[3],
+				Image: images[index],
 				Body:  line,
 			}
 			alerts = append(alerts, newAlert)
