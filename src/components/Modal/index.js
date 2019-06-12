@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, func, arrayOf, shape } from 'prop-types';
+import { string, func, arrayOf, shape, bool } from 'prop-types';
 import Alert from './Alert';
 import DetailAlert from './DetailAlert';
 
@@ -21,6 +21,7 @@ const propTypes = {
     }),
     closeModal: func,
     selectAlert: func,
+    detailView: bool,
 };
 
 
@@ -38,9 +39,9 @@ class Modal extends Component {
     }
 
     renderAlerts = () => {
-        const { alerts, selectAlert, selectedAlert  } = this.props;
+        const { alerts, selectAlert, selectedAlert, detailView } = this.props;
 
-        if (Object.keys(selectedAlert).length) {
+        if (detailView) {
             return <DetailAlert alert={selectedAlert} selectAlert={selectAlert}/>
         }
 
@@ -50,9 +51,9 @@ class Modal extends Component {
     }
 
     renderButton = () => {
-        const { closeModal, selectedAlert, selectAlert  } = this.props;
+        const { closeModal, detailView, selectAlert  } = this.props;
 
-        if (Object.keys(selectedAlert).length) {
+        if (detailView) {
             return (
                 <i
                     className="fas fa-chevron-left modal-button back-button" 
@@ -70,9 +71,12 @@ class Modal extends Component {
     }
 
     render() {
+        const { detailView } = this.props;
         return (
             <div className="modal-cover" onClick={(e) => this.handleClickOutside(e)}>
-                <div className="modal-wrapper" ref={this.setWrapperRef}>
+                <div 
+                    className={`modal-wrapper ${detailView ? "detail-modal-wrapper" : ""}`}
+                    ref={this.setWrapperRef}>
                     {this.renderButton()}
                     <div className="modal-list">
                         {this.renderAlerts()}

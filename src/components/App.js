@@ -98,6 +98,7 @@ Index: "${i}"
   render() {
     const { showModal, alerts, hasViewed, selectedAlert } = this.state;
     const alertCount = hasViewed ? 0 : alerts.length;
+    const detailView = Object.keys(selectedAlert).length ? true : false
 
     return (
       <div className="App">
@@ -109,6 +110,7 @@ Index: "${i}"
               closeModal={this.closeModal} 
               selectAlert={this.selectAlert}
               selectedAlert={selectedAlert}
+              detailView={detailView}
             />
         }
       </div>
