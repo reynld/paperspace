@@ -110,6 +110,7 @@ code {
   width: 30px;
   height: 30px;
   line-height: 30px;
+  user-select: none;
 }
 
 .close-modal:hover {
@@ -156,3 +157,12 @@ code {
   margin-bottom: 50px;
 }
 
+.modal-cover {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}

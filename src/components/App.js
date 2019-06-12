@@ -73,16 +73,20 @@ Index: "${i}"
   }
 
   closeModal = () => {
-    this.setState({...this.state, showModal: !this.state.showModal})
+    this.setState({...this.state, showModal: false})
+  }
+
+  openModal = () => {
+    this.setState({...this.state, showModal: true})
   }
 
   render() {
     const { showModal, alerts } = this.state;
     return (
       <div className="App">
-        <Avatar closeModal={this.closeModal} notifications={alerts.length}/>
+        <Avatar openModal={this.openModal} notifications={alerts.length}/>
         {
-          showModal && <Modal alerts={alerts} onCloseModal={this.closeModal}/>
+          showModal && <Modal alerts={alerts} closeModal={this.closeModal}/>
         }
       </div>
     );

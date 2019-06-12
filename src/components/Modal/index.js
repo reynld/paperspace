@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Alert from './Alert';
 
@@ -12,25 +12,45 @@ const propTypes = {
             image: PropTypes.string,
         })
     ),
-    onCloseModal: PropTypes.func,
+    closeModal: PropTypes.func,
 };
 
 
-const Modal = ({alerts, onCloseModal}) => {
-    return (
-        <div className="modal-wrapper">
-            <span className="close-modal" onClick={() => onCloseModal()}>x</span>
-            <div className="modal-list">
-                {
-                    alerts && alerts.map((alert, i) => {
-                        return <Alert key={i} {...alert} />
-                    })
-                }
+class Modal extends Component {
+
+    setWrapperRef = (node) => {
+        this.wrapperRef = node;
+    }
+
+    handleClickOutside = (event) => {
+        const { closeModal } = this.props;
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            closeModal();
+        }
+    }
+
+    render() {
+        const {alerts, closeModal} = this.props;
+        return (
+            <div className="modal-cover" onClick={(e) => this.handleClickOutside(e)}>
+                <div className="modal-wrapper" ref={this.setWrapperRef}>
+                    <span 
+                        className="close-modal" 
+                        onClick={() => closeModal()}
+                        >x</span>
+                    
+                    <div className="modal-list">
+                        {
+                            alerts && alerts.map((alert, i) => {
+                                return <Alert key={i} {...alert} />
+                            })
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
-    );
-};
-
+        );
+    }
+}
 
 Modal.propTypes = propTypes;
 
