@@ -1,0 +1,21 @@
+.detailed-view {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 2;
+    transform: translateX(-620px);
+    background: white;
+    transition: transform 400ms ease-in-out;
+    .alert-info {
+        max-width: 100%;
+        padding: 0px 50px;
+        height: 100%;
+        margin: 0 auto;
+        border: none;
+        cursor: default;
+        .alert-date {
+            padding-left: 0px;
+            margin-top: 10px;
+        }
+    }
+}
