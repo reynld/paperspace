@@ -28,13 +28,58 @@ const propTypes = {
 
 class Modal extends Component {
 
+    state = {
+        mounted: false,
+        unmount: false
+    }
+
     wrapperRef = React.createRef()
 
-    handleClickOutside = (event) => {
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({...this.state, mounted: true,})
+        }, 1)
+    }
+
+    closeModal = () => {
         const { closeModal } = this.props;
-        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+        this.setState({...this.state, unmount: true})
+        setTimeout(() => {
             closeModal();
+        }, 300)
+    }
+
+    handleClickOutside = (event) => {
+        if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+            this.closeModal()
         }
+    }
+
+    onSelectAlertClick = (alert) => {
+        const { selectAlert } = this.props;
+        this.wrapperRef.current.scrollTo(0, 0);
+        selectAlert(alert)
+    }
+
+    getModalClassName = () => {
+        const { detailView} = this.props;
+        const { mounted, unmount } = this.state;
+
+        let className = 'modal-wrapper';
+
+        if (detailView) {
+            className += " detail-modal-wrapper";
+        }
+
+        if (mounted) {
+            className += " modal-mounted";
+        }
+
+        if (unmount) {
+            className += " modal-unmount";
+        } 
+
+        return className
     }
 
     renderAlerts = () => {
@@ -45,7 +90,7 @@ class Modal extends Component {
     }
 
     renderButton = () => {
-        const { closeModal, detailView, toggleDetail } = this.props;
+        const { detailView, toggleDetail } = this.props;
 
         if (detailView) {
             return (
@@ -59,29 +104,38 @@ class Modal extends Component {
         return (
             <i
                 className="fas fa-times modal-button" 
-                onClick={() => closeModal()}
+                onClick={() => this.closeModal()}
             />
         )
     }
 
-    onSelectAlertClick = (alert) => {
-        const { selectAlert } = this.props;
-        this.wrapperRef.current.scrollTo(0, 0);
-        selectAlert(alert)
+    renderContent = () => {
+        const { alerts, selectedAlert } = this.props
+        if (alerts.length > 0) {
+            return (
+                <>
+                    <DetailAlert alert={selectedAlert}/>
+                    <div className="modal-list">{this.renderAlerts()}</div>
+                </>
+            )
+        }
+
+        return (
+            <div className="no-alerts">
+                No new updates
+            </div>
+        )
     }
 
     render() {
-        const { detailView, selectedAlert } = this.props;
         return (
             <div className="modal-cover" onClick={(e) => this.handleClickOutside(e)}>
                 <div 
-                    className={`modal-wrapper ${detailView ? "detail-modal-wrapper" : ""}`}
-                    ref={this.wrapperRef}>
+                    className={this.getModalClassName()}
+                    ref={this.wrapperRef}
+                >
                     {this.renderButton()}
-                    <DetailAlert alert={selectedAlert}/>
-                    <div className="modal-list">
-                        {this.renderAlerts()}
-                    </div>
+                    {this.renderContent()}
                 </div>
             </div>
         );
