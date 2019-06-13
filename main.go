@@ -12,6 +12,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 )
 
 // Alert struct for parsed alerts from markdown
@@ -34,14 +35,19 @@ func main() {
 	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
 
 	r := mux.NewRouter()
-	r.HandleFunc("/get/alerts", parseMarkDown).Methods("GET")
+	r.HandleFunc("/alerts", parseMarkDown).Methods("GET")
+
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"GET"},
+	})
 
 	fmt.Printf("server live on port%s\n", port)
-	log.Fatal(http.ListenAndServe(port, r))
+	log.Fatal(http.ListenAndServe(port, c.Handler(r)))
 }
 
 func parseMarkDown(w http.ResponseWriter, r *http.Request) {
-	url := fmt.Sprintf(os.Getenv("MD_URL"))
+	url := fmt.Sprintf(os.Getenv("GIST_URL"))
 
 	resp, err := http.Get(url)
 	if err != nil {
