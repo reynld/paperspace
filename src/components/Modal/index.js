@@ -36,7 +36,9 @@ class Modal extends Component {
     wrapperRef = React.createRef()
 
     componentDidMount() {
-        this.setState({...this.state, mounted: true,})
+        setTimeout(() => {
+            this.setState({...this.state, mounted: true,})
+        }, 1)
     }
 
     closeModal = () => {
