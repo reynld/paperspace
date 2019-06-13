@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 import Avatar from './Avatar';
 import Modal from './Modal';
 
@@ -20,9 +21,16 @@ class App extends Component {
 
   getAlerts = () => {
     const { REACT_APP_BACKEND_URL } = process.env;
-    axios.get(REACT_APP_BACKEND_URL)
-    .then(res => {
-      this.setState({...this.state, alerts: res.data})
+    const cookies = new Cookies();
+
+    axios.get(
+      REACT_APP_BACKEND_URL
+    ).then(res => {
+      if (cookies.get('viewed')) {
+        this.setState({...this.state, alerts: res.data, hasViewed: true})
+      } else {
+        this.setState({...this.state, alerts: res.data})
+      }
     })
     .catch(err => console.error('Error retrieving alerts\nError: '+ err))
   }
@@ -43,12 +51,23 @@ class App extends Component {
     })
   }
 
+  setViewedCookie = () => {
+    const cookies = new Cookies();
+    if (!cookies.get('viewed')) {
+      let expires = new Date();
+      expires.setTime(expires.getTime() + ( 60000 * 3));
+      cookies.set("viewed", true, {path: "/", expires, });
+    }
+  }
+
   closeModal = () => {
     this.setState({
       ...this.state, 
       showModal: false, 
       hasViewed: true, 
     })
+
+    this.setViewedCookie();
   }
 
   openModal = () => {
