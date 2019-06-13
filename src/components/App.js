@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 import Avatar from './Avatar';
 import Modal from './Modal';
-import images from '../assets/illustrations.json'
-
+import { parseMarkdown } from './Utils/helper'
 
 class App extends Component {
 
@@ -16,64 +16,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { REACT_APP_GIST } = process.env;
-    axios.get(REACT_APP_GIST)
-    .then(res => {
-      this.parseMarkdown(res.data)
-    })
-    .catch(err => console.error(`
-Error retrieving markdown: 
-${err}
-    `))
+    this.getAlerts();
   }
 
-  parseMarkdown = (md) => {
-    const mdArr = md.split('\n');
-    const alerts = [];
-    let alert = [];
-
-    /************
-    Loops through each markdown line
-    checking to see if the line starts with '###'
-    if it does, it appends the line to the alert array
-    once we reach a line the does not start '###'
-    we have all the alerts values and that current line is the body
-    then we append a new alert object into the alerts array
-    using the position in the alert array to determine what value it is
-    ************/
-    mdArr.forEach((ln, i) => {
-      if (i !== 0) {
-        const alen = alert.length;
-
-        if (ln.startsWith('###')) {
-          const content = ln.split('### ');
-          alert.push(content[1]);
-
-        } else if (alen === 4) {
-
-          alerts.push({
-            title: alert[0],
-            date: alert[1],
-            tag: alert[2],
-            image: images[alert[3]],
-            body:  ln,
-          })
-
-          alert = []
-
-        } else if (ln !== ""){
-          console.error(`
-Error formatting markdown:
-Alert: "${alert}"
-Current line: "${ln}"
-Index: "${i}"
-          `)
+  getAlerts = () => {
+    const { REACT_APP_GIST } = process.env;
+    const cookies = new Cookies();
+    
+    axios.get(REACT_APP_GIST)
+      .then(res => {
+        const alerts = parseMarkdown(res.data)
+        if (cookies.get('viewed')) {
+          this.setState({...this.state, alerts, hasViewed: true})
+        } else {
+          this.setState({...this.state, alerts})
         }
-      }
-    })
-
-    alerts.sort((a, b) => new Date(b.date) - new Date(a.date))
-    this.setState({...this.state, alerts})
+      })
+      .catch(err => console.error('Error retrieving alerts\nError: '+ err))
   }
 
   selectAlert = (alert) => {
@@ -91,12 +50,23 @@ Index: "${i}"
     })
   }
 
+  setViewedCookie = () => {
+    const cookies = new Cookies();
+    if (!cookies.get('viewed')) {
+      let expires = new Date();
+      expires.setTime(expires.getTime() + ( 60000 * 3));
+      cookies.set("viewed", true, {path: "/", expires, });
+    }
+  }
+
   closeModal = () => {
     this.setState({
       ...this.state, 
       showModal: false, 
       hasViewed: true, 
     })
+
+    this.setViewedCookie();
   }
 
   openModal = () => {
