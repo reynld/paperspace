@@ -1,10 +1,10 @@
 {
   "name": "ps-notifier",
   "version": "1.0.0",
-  "description": "Sample project for Paperspace ### [Demo](https://ps-notifier.now.sh/)",
-  "main": "index.js",
+  "description": "Sample project for Paperspace",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:frontend": "cd ./client && npm install && npm run start",
+    "start:backend": "export GO111MODULE=on && go run main.go"
   },
   "repository": {
     "type": "git",
