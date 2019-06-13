@@ -96,7 +96,6 @@ Index: "${i}"
       ...this.state, 
       showModal: false, 
       hasViewed: true, 
-      selectedAlert: {},
     })
   }
 
