@@ -5,7 +5,7 @@
     z-index: 2;
     transform: translateX(-620px);
     background: white;
-    transition: transform 400ms ease-in-out;
+    transition: transform $animation-time ease-in-out;
     .alert-info {
         max-width: 100%;
         padding: 0px 50px;
