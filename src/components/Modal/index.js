@@ -37,6 +37,12 @@ class Modal extends Component {
         }
     }
 
+    onSelectAlertClick = (alert) => {
+        const { selectAlert } = this.props;
+        this.wrapperRef.current.scrollTo(0, 0);
+        selectAlert(alert)
+    }
+
     renderAlerts = () => {
         const { alerts } = this.props;
         return alerts.map((alert, i) => {
@@ -64,24 +70,34 @@ class Modal extends Component {
         )
     }
 
-    onSelectAlertClick = (alert) => {
-        const { selectAlert } = this.props;
-        this.wrapperRef.current.scrollTo(0, 0);
-        selectAlert(alert)
+    renderContent = () => {
+        const { alerts, selectedAlert } = this.props
+        if (alerts.length > 0) {
+            return (
+                <>
+                    <DetailAlert alert={selectedAlert}/>
+                    <div className="modal-list">{this.renderAlerts()}</div>
+                </>
+            )
+        }
+
+        return (
+            <div className="no-alerts">
+                No new updates
+            </div>
+        )
     }
 
     render() {
-        const { detailView, selectedAlert } = this.props;
+        const { detailView} = this.props;
         return (
             <div className="modal-cover" onClick={(e) => this.handleClickOutside(e)}>
                 <div 
                     className={`modal-wrapper ${detailView ? "detail-modal-wrapper" : ""}`}
-                    ref={this.wrapperRef}>
+                    ref={this.wrapperRef}
+                >
                     {this.renderButton()}
-                    <DetailAlert alert={selectedAlert}/>
-                    <div className="modal-list">
-                        {this.renderAlerts()}
-                    </div>
+                    {this.renderContent()}
                 </div>
             </div>
         );
