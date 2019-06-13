@@ -46,7 +46,7 @@ class Modal extends Component {
         this.setState({...this.state, unmount: true})
         setTimeout(() => {
             closeModal();
-        }, 400)
+        }, 300)
     }
 
     handleClickOutside = (event) => {
