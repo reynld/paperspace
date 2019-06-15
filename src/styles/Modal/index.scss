@@ -29,15 +29,21 @@
 
         &.modal-mounted {
             height: 400px;
+            &.detail-modal-wrapper {
+                height: 500px;
+            }
         }
 
         &.modal-unmount {
-            height: 50px
+            height: 50px;
+            &.detail-modal-wrapper {
+                height: 50px;
+            }
         }
 
         &.detail-modal-wrapper {
             overflow: hidden;
-            height: 500px;
+            transition: height $animation-time ease-in-out;
 
             .detailed-view {
                 transform: translateX(0px);
